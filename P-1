@@ -1,0 +1,67 @@
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+class Batsman {
+private:
+    int bcode;
+    char bname[30];
+    int innings;
+    int notout;
+    int runs;
+    float batavg;
+
+  
+    void calcavg() {
+        if (innings - notout != 0)
+            batavg = (float)runs / (innings - notout);
+        else
+            batavg = runs;  // If never out, average = runs
+    }
+
+public:
+
+    void getdata() {
+        cout << "Enter batsman code: ";
+        cin >> bcode;
+        cin.ignore(); 
+        cout << "Enter batsman name: ";
+        cin.getline(bname, 30);
+        cout << "Enter innings: ";
+        cin >> innings;
+        cout << "Enter not outs: ";
+        cin >> notout;
+        cout << "Enter total runs: ";
+        cin >> runs;
+
+        calcavg(); /
+    }
+
+   
+    void displaydata() {
+        cout << "\nBatsman Code : " << bcode;
+        cout << "\nBatsman Name : " << bname;
+        cout << "\nInnings      : " << innings;
+        cout << "\nNot Outs     : " << notout;
+        cout << "\nRuns         : " << runs;
+        cout << "\nBatting Avg  : " << batavg << endl;
+    }
+};
+
+int main() {
+    Batsman players[10];
+
+    cout << "Enter details for 10 players:\n";
+    for (int i = 0; i < 10; i++) {
+        cout << "\nPlayer " << (i + 1) << ":\n";
+        players[i].getdata();
+    }
+
+    cout << "\n---- Players' Batting Averages ----\n";
+    for (int i = 0; i < 10; i++) {
+        cout << "\nPlayer " << (i + 1) << " details:";
+        players[i].displaydata();
+    }
+
+    return 0;
+}
