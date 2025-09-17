@@ -1,0 +1,74 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Country {
+private:
+    string name;
+    long long population;
+    double area;
+
+public:
+  
+    void getdata() {
+        cout << "Enter Country Name: ";
+        cin >> name;
+        cout << "Enter Population: ";
+        cin >> population;
+        cout << "Enter Area (in sq.km): ";
+        cin >> area;
+    }
+
+    void showdata() {
+        cout << "\nCountry: " << name;
+        cout << "\nPopulation: " << population;
+        cout << "\nArea: " << area;
+        cout << "\nDensity: " << getDensity();
+        cout << "\n--------------------------\n";
+    }
+
+  
+    string getName() { return name; }
+    long long getPopulation() { return population; }
+    double getArea() { return area; }
+    double getDensity() { return (population / area); }
+};
+
+int main() {
+    int n;
+    cout << "Enter number of countries: ";
+    cin >> n;
+
+    Country countries[n];
+
+    // Input countries
+    for (int i = 0; i < n; i++) {
+        cout << "\nEnter details of country " << (i + 1) << ":\n";
+        countries[i].getdata();
+    }
+
+    int idxLargestArea = 0, idxSmallestPop = 0, idxSmallestDensity = 0;
+
+    for (int i = 1; i < n; i++) {
+        if (countries[i].getArea() > countries[idxLargestArea].getArea())
+            idxLargestArea = i;
+
+        if (countries[i].getPopulation() < countries[idxSmallestPop].getPopulation())
+            idxSmallestPop = i;
+
+        if (countries[i].getDensity() < countries[idxSmallestDensity].getDensity())
+            idxSmallestDensity = i;
+    }
+
+    cout << "\n========== Results ==========\n";
+    cout << "Country with Largest Area: " << countries[idxLargestArea].getName()
+         << " (" << countries[idxLargestArea].getArea() << " sq.km)\n";
+
+    cout << "Country with Smallest Population: " << countries[idxSmallestPop].getName()
+         << " (" << countries[idxSmallestPop].getPopulation() << " people)\n";
+
+    cout << "Country with Smallest Population Density: " << countries[idxSmallestDensity].getName()
+         << " (" << countries[idxSmallestDensity].getDensity() << " per sq.km)\n";
+
+    return 0;
+}
