@@ -16,7 +16,7 @@ private:
         if (innings - notout != 0)
             batavg = (float)runs / (innings - notout);
         else
-            batavg = runs;  // If never out, average = runs
+            batavg = runs;  
     }
 
 public:
